@@ -53,7 +53,7 @@ bool Sudoku9::isValidSubMatrix(int number, int row, int column)
 	return true;
 }
 
-int Sudoku9::countNumbersInSubMatrix(int row, int column)
+int Sudoku9::countCellsInSubMatrix(int row, int column)
 {
     int count = 0;
 
@@ -71,7 +71,7 @@ bool Sudoku9::anyGreaterThanSix()
 {
     for (int i = 0; i <= 6; i += 3)
         for (int j = 0; j <= 6; j += 3) {
-            int count = countNumbersInSubMatrix(i, j);
+            int count = countCellsInSubMatrix(i, j);
 
             if (count > 6)
                 return true;
@@ -143,7 +143,7 @@ void Sudoku9::fillDiagonal()
     fillSubMatrix(6, 6);
 }
 
-void Sudoku9::removeNumbers()
+void Sudoku9::removeCells()
 {
     int count = howMuchToRemove();
     while (count != 0) {
@@ -151,7 +151,7 @@ void Sudoku9::removeNumbers()
         int row = cell / 9;
         int column = cell % 9;
 
-        int numbersInSubMatrix = countNumbersInSubMatrix(row, column);
+        int numbersInSubMatrix = countCellsInSubMatrix(row, column);
         bool anyLeft = anyGreaterThanSix();
 
         if (grid[row][column] != 0 && (numbersInSubMatrix > 6 || (numbersInSubMatrix <= 6 && !anyLeft))) {
@@ -166,7 +166,7 @@ void Sudoku9::generateSudoku()
     resetGrid();
     fillDiagonal();
     solveSudoku(0, 0);
-    removeNumbers();
+    removeCells();
 }
 
 void Sudoku9::resetGrid()
