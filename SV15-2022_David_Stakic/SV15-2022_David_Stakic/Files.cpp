@@ -28,12 +28,10 @@ void Files::writeIntoFile(const int grid[9][9])
     oFile.close();
 }
 
-int** Files::readFromFile()
+void Files::readFromFile(int grid[9][9])
 {
-    int** grid = new int* [9];
     char c;
-    for (int i = 0; i < 9; ++i) {
-        grid[i] = new int[9];
+    for (int i = 0; i < 9; ++i)
         for (int j = 0; j < 9; ++j) {
             iFile.get(c);
             while (c < '0' || c > '9') {
@@ -50,9 +48,6 @@ int** Files::readFromFile()
             }
             grid[i][j] = c - '0';
         }
-    }
 
     iFile.close();
-
-    return grid;
 }

@@ -13,5 +13,5 @@ public:
 	Files(std::string fileName);
 
 	void writeIntoFile(const int grid[9][9]);
-	int** readFromFile();
+	void readFromFile(int grid[9][9]);
 };

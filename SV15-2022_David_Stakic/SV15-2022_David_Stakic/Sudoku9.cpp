@@ -154,8 +154,6 @@ void Sudoku9::removeNumbers()
         int numbersInSubMatrix = countNumbersInSubMatrix(row, column);
         bool anyLeft = anyGreaterThanSix();
 
-        if (column != 0)
-            --column;
         if (grid[row][column] != 0 && (numbersInSubMatrix > 6 || (numbersInSubMatrix <= 6 && !anyLeft))) {
             grid[row][column] = 0;
             count--;
