@@ -1,6 +1,6 @@
 #include "Sudoku9.hpp"
 
-Sudoku9::Sudoku9() : files("test.txt")
+Sudoku9::Sudoku9() : files("test.txt"), numberOfValid(0), numberOfFaults(0), gameCounter(0)
 {
 	for (int i = 0; i < 9; ++i)
 		for (int j = 0; j < 9; ++j)
@@ -167,6 +167,40 @@ void Sudoku9::generateSudoku()
     fillDiagonal();
     solveSudoku(0, 0);
     removeCells();
+}
+
+bool Sudoku9::isSolved()
+{
+    for (int i = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++) {
+            int cell = grid[i][j];
+            grid[i][j] = -1;
+
+            if (cell == 0 || !isValidPosition(cell, i, j)) {
+                grid[i][j] = cell;
+                return false;
+            }
+            grid[i][j] = cell;
+        }
+    return true;
+}
+
+void Sudoku9::calculateStatistics()
+{
+    gameCounter++;
+
+    for (int i = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++) {
+            int cell = grid[i][j];
+            grid[i][j] = -1;
+
+            if (cell == 0 || !isValidPosition(cell, i, j))
+                numberOfFaults++;
+            else
+                numberOfValid++;
+
+            grid[i][j] = cell;
+        }
 }
 
 void Sudoku9::resetGrid()
