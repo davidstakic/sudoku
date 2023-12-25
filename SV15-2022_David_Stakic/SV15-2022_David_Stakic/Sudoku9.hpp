@@ -19,7 +19,6 @@ private:
 	int numberOfFaults;
 	int gameCounter;
 public:
-	Files files;
 	/**
 	 * @brief Constructs a Sudoku9 object, setting all 9x9 sudoku grid cells to 0.
 	 * The default constructor sets up the initial state of the Sudoku puzzle.
@@ -27,7 +26,11 @@ public:
 	Sudoku9();
 
 	const int(*getGrid() const)[9];
-	void setGrid(const int newGrid[9][9]);
+	int(*getGrid())[9];
+
+	int getNumberOfValid() const;
+	int getNumberOfFaults() const;
+	int getGameCounter() const;
 
 	/**
 	 * @brief Checks if the given number can be setted to the given position by checking if number is present in the row, column and 3x3 submatrix.
@@ -36,21 +39,21 @@ public:
 	 * @param column Index of the column where we want to put our number.
 	 * @return Returns true if the position is valid, false if isn't valid.
 	*/
-	bool isValidPosition(int number, int row, int column);
+	bool isValidPosition(const int& number, const int& row, const int& column);
 	/**
 	 * @brief Checks if the given number can be setted to the given row by checking if number is present in the row.
 	 * @param number The number we want to put in the 9x9 sudoku grid.
 	 * @param row Index of the row where we want to put our number.
 	 * @return Returns true if the position is valid, false if isn't valid.
 	*/
-	bool isValidRow(int number, int row);
+	bool isValidRow(const int& number, const int& row);
 	/**
 	 * @brief Checks if the given number can be setted to the given column by checking if number is present in the column.
 	 * @param number The number we want to put in the 9x9 sudoku grid.
 	 * @param column Index of the column where we want to put our number.
 	 * @return Returns true if the position is valid, false if isn't valid.
 	*/
-	bool isValidColumn(int number, int column);
+	bool isValidColumn(const int& number, const int& column);
 	/**
 	 * @brief Checks if the given number can be setted to the given position by checking if number is present in the 3x3 submatrix.
 	 * @param number The number we want to put in the 9x9 sudoku grid.
@@ -58,7 +61,7 @@ public:
 	 * @param column Index of the column where we want to put our number.
 	 * @return Returns true if the position is valid, false if isn't valid.
 	*/
-	bool isValidSubMatrix(int number, int row, int column);
+	bool isValidSubMatrix(const int& number, const int& row, const int& column);
 
 	/**
 	 * @brief Counts how many cells are filled in the 3x3 submatrix.
@@ -66,7 +69,7 @@ public:
 	 * @param column Index of the column in which the 3x3 submatrix is.
 	 * @return Returns number of filled cells in the 3x3 submatrix.
 	*/
-	int countCellsInSubMatrix(int row, int column);
+	int countCellsInSubMatrix(const int& row, const int& column);
 	/**
 	 * @brief Checks if there is any 3x3 submatrix in the 9x9 sudoku grid that has more than 6 cells filled.
 	 * This function is used while removing cells when generating 9x9 sudoku grid, to ensure that no 3x3 submatrix has more than 6 cells filled.
@@ -106,7 +109,7 @@ public:
 	 * @param row Index of the row where generating starts.
 	 * @param column Index of the column where generating starts.
 	*/
-	void fillSubMatrix(int row, int column);
+	void fillSubMatrix(const int& row, const int& column);
 	/**
 	 * @brief Fills 3x3 submatrices on the main diagonal with random numbers from 1 to 9 and ensures that no numbers are repeated.
 	*/

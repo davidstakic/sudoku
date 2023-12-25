@@ -21,7 +21,7 @@ void printSolutionPicker()
 	std::cout << "(2) Izgenerisi resenje sudoku zagonetke" << std::endl;
 }
 
-void printStats(int numberOfValid, int numberOfFaults, int gameCounter)
+void printStats(const int& numberOfValid, const int& numberOfFaults, const int& gameCounter)
 {
 	std::cout << "Broj tacnih: " << numberOfValid << ", Broj pogresnih: " << 
 		numberOfFaults << ", Redni broj igre: " << gameCounter << std::endl;

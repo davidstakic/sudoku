@@ -1,9 +1,11 @@
 #include "Files.hpp"
 
-Files::Files(std::string fileName) : fileName(fileName), oFile(fileName), iFile(fileName) {}
+Files::Files(std::string fileName) : fileName(fileName){}
 
 void Files::writeIntoFile(const int grid[9][9])
 {
+    oFile.open(this->fileName);
+
     for (int i = 0; i < 9; ++i) {
         if (i % 3 == 0) {
             oFile << "-------------------------\n";
@@ -28,8 +30,10 @@ void Files::writeIntoFile(const int grid[9][9])
     oFile.close();
 }
 
-void Files::readFromFile(int grid[9][9])
+void Files::readFromFile(int(*grid)[9])
 {
+    iFile.open(this->fileName);
+
     char c;
     for (int i = 0; i < 9; ++i)
         for (int j = 0; j < 9; ++j) {

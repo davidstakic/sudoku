@@ -5,4 +5,4 @@
 void printMenu();
 void printSettingPicker();
 void printSolutionPicker();
-void printStats(int numberOfValid, int numberOfFaults, int gameCounter);
+void printStats(const int& numberOfValid, const int& numberOfFaults, const int& gameCounter);

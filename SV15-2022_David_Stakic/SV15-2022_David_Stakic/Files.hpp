@@ -37,5 +37,5 @@ public:
 	 * @brief Reads a Sudoku grid from the associated file into the provided array.
 	 * @param grid The array where the read Sudoku grid will be stored.
 	*/
-	void readFromFile(int grid[9][9]);
+	void readFromFile(int(*grid)[9]);
 };
