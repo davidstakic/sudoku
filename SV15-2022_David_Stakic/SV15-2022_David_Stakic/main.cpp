@@ -6,12 +6,14 @@
 int main(int argc, char* argv[]) {
 	if (argc != 2) {
 		std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
-		return 1; // Exit with an error code
+		return 1;
 	}
 
 	const std::string fileName = argv[1];
 	Sudoku9 sudoku;
 	Files file(fileName);
+
+	file.writeIntoFile(sudoku.getGrid());
 
 	bool isSolved;
 
@@ -28,6 +30,9 @@ int main(int argc, char* argv[]) {
 
 		if (option == "2")
 			return 0;
+
+		sudoku.resetGrid();
+		file.writeIntoFile(sudoku.getGrid());
 
 		printSettingPicker();
 
@@ -74,4 +79,6 @@ int main(int argc, char* argv[]) {
 		printStats(sudoku.getNumberOfValid(), sudoku.getNumberOfFaults(), sudoku.getGameCounter());
 
 	}
+
+	return 0;
 }

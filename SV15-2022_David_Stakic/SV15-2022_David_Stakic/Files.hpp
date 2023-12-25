@@ -26,6 +26,10 @@ public:
 	 * @param fileName The name of the file to be read from or written to.
 	*/
 	Files(std::string fileName);
+	/**
+	 * @brief Destructor for the Files class, removes the associated file.
+	 */
+	~Files();
 
 	/**
 	 * @brief Writes the provided Sudoku grid into the associated file.

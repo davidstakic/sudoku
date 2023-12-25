@@ -2,6 +2,11 @@
 
 Files::Files(std::string fileName) : fileName(fileName){}
 
+Files::~Files()
+{
+    remove(this->fileName.c_str()); // deleting file
+}
+
 void Files::writeIntoFile(const int grid[9][9])
 {
     oFile.open(this->fileName);
