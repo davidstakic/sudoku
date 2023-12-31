@@ -1,10 +1,17 @@
 #include "Files.hpp"
 
-Files::Files(std::string fileName) : fileName(fileName){}
+Files::Files() : fileName("") {}
+
+Files::Files(const std::string& fileName) : fileName(fileName){}
 
 Files::~Files()
 {
     remove(this->fileName.c_str()); // deleting file
+}
+
+void Files::setFileName(const std::string& newFileName)
+{
+    this->fileName = newFileName;
 }
 
 void Files::writeIntoFile(const int grid[9][9])

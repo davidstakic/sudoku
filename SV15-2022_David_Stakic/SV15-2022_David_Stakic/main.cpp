@@ -1,12 +1,21 @@
 #include <iostream>
+#include <cstring>
 #include "Sudoku9.hpp"
 #include "Files.hpp"
 #include "menu.hpp"
+#include "Test.hpp"
 
 int main(int argc, char* argv[]) {
 	if (argc != 2) {
-		std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
 		return 1;
+	}
+
+	if (strcmp(argv[1], "tests") == 0) {
+		Test tests;
+
+		tests.runTests();
+
+		return 0;
 	}
 
 	const std::string fileName = argv[1];

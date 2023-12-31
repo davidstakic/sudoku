@@ -39,7 +39,7 @@ bool Sudoku9::isValidPosition(const int& number, const int& row, const int& colu
 
 bool Sudoku9::isValidRow(const int& number, const int& row)
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; ++i)
 		if (this->grid[row][i] == number)
 			return false;
 	return true;
@@ -47,7 +47,7 @@ bool Sudoku9::isValidRow(const int& number, const int& row)
 
 bool Sudoku9::isValidColumn(const int& number, const int& column)
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; ++i)
 		if (this->grid[i][column] == number)
 			return false;
 	return true;
@@ -58,8 +58,8 @@ bool Sudoku9::isValidSubMatrix(const int& number, const int& row, const int& col
 	int subMatrixRowStart = row - row % 3;
 	int subMatrixColStart = column - column % 3;
 
-	for (int i = subMatrixRowStart; i < (subMatrixRowStart + 3); i++)
-		for (int j = subMatrixColStart; j < (subMatrixColStart + 3); j++)
+	for (int i = subMatrixRowStart; i < (subMatrixRowStart + 3); ++i)
+		for (int j = subMatrixColStart; j < (subMatrixColStart + 3); ++j)
 			if (this->grid[i][j] == number)
 				return false;
 	return true;
@@ -72,10 +72,10 @@ int Sudoku9::countCellsInSubMatrix(const int& row, const int& column)
     int subMatrixRowStart = row - row % 3;
     int subMatrixColStart = column - column % 3;
 
-    for (int i = subMatrixRowStart; i < (subMatrixRowStart + 3); i++)
-        for (int j = subMatrixColStart; j < (subMatrixColStart + 3); j++)
+    for (int i = subMatrixRowStart; i < (subMatrixRowStart + 3); ++i)
+        for (int j = subMatrixColStart; j < (subMatrixColStart + 3); ++j)
             if (this->grid[i][j] != 0) // is it filled?
-                count++;
+                ++count;
     return count;
 }
 
@@ -99,7 +99,7 @@ bool Sudoku9::solveSudoku(int row, int column)
         return true;
     
     if (column == 9) {
-        row++;
+        ++row;
         column = 0;
     }
 
@@ -108,7 +108,7 @@ bool Sudoku9::solveSudoku(int row, int column)
         return solveSudoku(row, column + 1);
 
     // trying to put every number
-    for (int number = 1; number <= 9; number++)
+    for (int number = 1; number <= 9; ++number)
     {
         if (isValidPosition(number, row, column))
         {
@@ -120,6 +120,7 @@ bool Sudoku9::solveSudoku(int row, int column)
 
         this->grid[row][column] = 0; // if current placement do not lead to solution, backtrack
     }
+
     return false;
 }
 
@@ -141,8 +142,8 @@ int Sudoku9::howMuchToRemove()
 void Sudoku9::fillSubMatrix(const int& row, const int& column)
 {
     int number;
-    for (int i = row; i < (row + 3); i++)
-        for (int j = column; j < (column + 3); j++) {
+    for (int i = row; i < (row + 3); ++i)
+        for (int j = column; j < (column + 3); ++j) {
             do {
                 number = getRandomNumber();
             } while (!isValidSubMatrix(number, row, column));
@@ -172,7 +173,7 @@ void Sudoku9::removeCells()
         // remove it if has more than 6 elements or if there isn't any submatrices with more than 6 elements left
         if (this->grid[row][column] != 0 && (numbersInSubMatrix > 6 || (numbersInSubMatrix <= 6 && !anyLeft))) {
             this->grid[row][column] = 0;
-            count--;
+            --count;
         }
     }
 }
@@ -187,12 +188,12 @@ void Sudoku9::generateSudoku()
 
 bool Sudoku9::isSolved()
 {
-    for (int i = 0; i < 9; i++)
-        for (int j = 0; j < 9; j++) {
+    for (int i = 0; i < 9; ++i)
+        for (int j = 0; j < 9; ++j) {
             // doing this to exclude this cell
             // check every cell in row, column and submatrix except this one
             int cell = this->grid[i][j];
-            this->grid[i][j] = -1;
+            this->grid[i][j] = 0;
 
             if (cell == 0 || !isValidPosition(cell, i, j)) {
                 this->grid[i][j] = cell;
@@ -207,17 +208,17 @@ void Sudoku9::calculateStatistics()
 {
     this->numberOfValid = 0;
     this->numberOfFaults = 0;
-    this->gameCounter++;
+    ++this->gameCounter;
 
-    for (int i = 0; i < 9; i++)
-        for (int j = 0; j < 9; j++) {
+    for (int i = 0; i < 9; ++i)
+        for (int j = 0; j < 9; ++j) {
             int cell = this->grid[i][j];
             this->grid[i][j] = -1;
 
             if (cell == 0 || !isValidPosition(cell, i, j))
-                this->numberOfFaults++;
+                ++this->numberOfFaults;
             else
-                this->numberOfValid++;
+                ++this->numberOfValid;
 
             this->grid[i][j] = cell;
         }

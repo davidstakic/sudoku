@@ -2,7 +2,7 @@
  * @file Sudoku9.hpp
  * @brief Defines the Sudoku9 class, representing a 9x9 Sudoku grid with functionalities for generating, solving, and manipulating Sudoku puzzles.
  * @author David Stakic
- * @date 2023-12-22
+ * @date 2023-12-26
  */
 
 #pragma once
@@ -14,10 +14,10 @@
 */
 class Sudoku9 {
 private:
-	int grid[9][9];
-	int numberOfValid;
-	int numberOfFaults;
-	int gameCounter;
+	int grid[9][9]; /* represents sudoku table */
+	int numberOfValid; /* number of correct guesses */
+	int numberOfFaults; /* number of bad guesses */
+	int gameCounter; /* number of games played */
 public:
 	/**
 	 * @brief Constructs a Sudoku9 object, setting all 9x9 sudoku grid cells to 0.
@@ -25,11 +25,31 @@ public:
 	 */
 	Sudoku9();
 
+	/**
+	 * @brief Gets a constant pointer to the Sudoku grid. It doesn't allow changes to grid.
+	 * @return A constant pointer to a 2D array representing the Sudoku grid.
+	 */
 	const int(*getGrid() const)[9];
+	/**
+	 * @brief Gets a pointer to the Sudoku grid. Allow changes to grid.
+	 * @return A non-constant pointer to a 2D array representing the Sudoku grid.
+	 */
 	int(*getGrid())[9];
 
+	/**
+	 * @brief Gets the number of correct guesses made during Sudoku solving.
+	 * @return The number of correct guesses made.
+	 */
 	int getNumberOfValid() const;
+	/**
+	 * @brief Gets the number of bad guesses made during Sudoku solving.
+	 * @return The number of bad guesses made.
+	 */
 	int getNumberOfFaults() const;
+	/**
+	 * @brief Gets the number of Sudoku games played.
+	 * @return The number of Sudoku games played.
+	 */
 	int getGameCounter() const;
 
 	/**
